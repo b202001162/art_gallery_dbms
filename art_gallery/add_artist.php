@@ -4,16 +4,16 @@ require_once "config.php";
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     session_start();
     // Check if username is empty
-    if (!empty(trim($_POST["username"]))) {
-        $username = trim($_POST['username']);
+    if (!empty(trim($_POST["artistname"]))) {
+        $artistname = trim($_POST['artistname']);
         $password = trim($_POST['password']);
         $email = trim($_POST['email']);
         $DOB = trim($_POST['DOB']);
-        $sql = "Insert into admins (username, password, email, DOB) values('$username', '$password', '$email', '$DOB');";
+        $sql = "Insert into artist (artistname, password, email, DOB) values('$artistname', '$password', '$email', '$DOB');";
         $result = mysqli_query($conn, $sql);
-        $sql2 = "UPDATE admins set age = YEAR(NOW()) - YEAR(admins.DOB);";
+        $sql2 = "UPDATE artist set age = YEAR(NOW()) - YEAR(artist.DOB);";
         $result2 = mysqli_query($conn, $sql2);
-        header("location: admin_admin_data.php");
+        header("location: adm_artist_data.php");
     }
 
 }
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Add Admin</title>
+    <title>Add Artist</title>
 </head>
 
 <body style="background: #f9f9f9">
@@ -51,16 +51,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         <div class="container text-dark shadow p-3 mb-5 bg-white rounded"
             style="position: absolute; top: 50%; left: 50%;  transform: translate(-50%, -50%); width: 450px; border: none; padding: 20px 30px; border-radius: 5px;">
-            <h4>Add details of Admin Here:</h4>
+            <h4>Add details of Artist:</h4>
             <hr>
             <form action="" method="post">
                 <div class="form-group">
-                    <label for="adminName">Admin name</label>
-                    <input type="text" class="form-control" name="username" id="adminName" placeholder="Admin Name">
+                    <label for="inputEmail4">Artist name</label>
+                    <input type="text" class="form-control" name="artistname" id="inputEmail4" placeholder="Artist Name">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" id="email"
+                    <label for="inputPassword4">Email</label>
+                    <input type="email" class="form-control" name="email" id="inputPassword"
                         placeholder="Email">
                 </div>
                 <div class="form-group">
@@ -69,12 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         placeholder="Date of Birth">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password"
+                    <label for="inputPassword4">Password</label>
+                    <input type="password" class="form-control" name="password" id="inputPassword4"
                         placeholder="Password">
                 </div>
-                <button class="btn btn-primary" type="submit" class="wel_btn">Add</button>
-                <a href="admin_admin_data.php"><button class="btn btn-danger" type="" class="wel_btn">Cancel</button></a>
+                <button class="btn btn-primary" type="submit" class="wel_btn">Register</button>
+                <a href="adm_artist_data.php"><button class="btn btn-danger" type="" class="wel_btn">Cancel</button></a>
             </form>
         </div>
     </header>

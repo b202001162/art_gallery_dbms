@@ -4,16 +4,13 @@ require_once "config.php";
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     session_start();
     // Check if username is empty
-    if (!empty(trim($_POST["username"]))) {
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-        $email = trim($_POST['email']);
-        $DOB = trim($_POST['DOB']);
-        $sql = "Insert into admins (username, password, email, DOB) values('$username', '$password', '$email', '$DOB');";
+    if (!empty(trim($_POST["imgname"]))) {
+        $imgname = trim($_POST['imgname']);
+        $url = trim($_POST['url']);
+        $artistID = trim($_POST['artistID']);
+        $sql = "Insert into images (imgname, url, artistID) values('$imgname', '$url', $artistID);";
         $result = mysqli_query($conn, $sql);
-        $sql2 = "UPDATE admins set age = YEAR(NOW()) - YEAR(admins.DOB);";
-        $result2 = mysqli_query($conn, $sql2);
-        header("location: admin_admin_data.php");
+        header("location: adm_Image_data.php");
     }
 
 }
@@ -35,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Add Admin</title>
+    <title>Add Image</title>
 </head>
 
 <body style="background: #f9f9f9">
@@ -51,30 +48,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         <div class="container text-dark shadow p-3 mb-5 bg-white rounded"
             style="position: absolute; top: 50%; left: 50%;  transform: translate(-50%, -50%); width: 450px; border: none; padding: 20px 30px; border-radius: 5px;">
-            <h4>Add details of Admin Here:</h4>
+            <h4>Insert Image Details Here:</h4>
             <hr>
             <form action="" method="post">
                 <div class="form-group">
-                    <label for="adminName">Admin name</label>
-                    <input type="text" class="form-control" name="username" id="adminName" placeholder="Admin Name">
+                    <label for="inputEmail4">Image name</label>
+                    <input type="text" class="form-control" name="imgname" id="inputEmail4" placeholder="Image Name">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" id="email"
-                        placeholder="Email">
+                    <label for="inputPassword4">URL</label>
+                    <input type="text" class="form-control" name="url" id="inputPassword"
+                        placeholder="URL">
                 </div>
                 <div class="form-group">
-                    <label for="DOB">Date of Birth</label>
-                    <input type="date" class="form-control" name="DOB" id="DOB"
-                        placeholder="Date of Birth">
+                    <label for="DOB">Artist ID</label>
+                    <input type="text" class="form-control" name="artistID" id="DOB"
+                        placeholder="Artist ID">
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password"
-                        placeholder="Password">
-                </div>
-                <button class="btn btn-primary" type="submit" class="wel_btn">Add</button>
-                <a href="admin_admin_data.php"><button class="btn btn-danger" type="" class="wel_btn">Cancel</button></a>
+                <button class="btn btn-primary" type="submit" class="wel_btn">Register</button>
+                <a href="adm_Image_data.php"><button class="btn btn-danger" type="" class="wel_btn">Cancel</button></a>
             </form>
         </div>
     </header>
