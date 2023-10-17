@@ -59,28 +59,41 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] !== true) {
             if (mysqli_num_rows($result)) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     $id = $row['id'];
-                    $imgname = $row['imgname'];
+                    $image = $row['imgname'];
                     $url = $row['url'];
+                    $artistname = $row['artistname'];
                     if ($row1 = mysqli_fetch_assoc($result)) {
                         $id1 = $row1['id'];
                         $url1 = $row1['url'];
+                        $image1 = $row1['imgname'];
+                        $artistname1 = $row1['artistname'];
                     }
                     if ($row2 = mysqli_fetch_assoc($result)) {
                         $url2 = $row2['url'];
+                        $image2 = $row2['imgname'];
+                        $artistname2 = $row2['artistname'];
                     }
                     if ($row3 = mysqli_fetch_assoc($result)) {
                         $url3 = $row3['url'];
+                        $image3 = $row3['imgname'];
+                        $artistname3 = $row3['artistname'];
                     }
                     echo '
                         <div class="row">
                         <div class="wel_img_cont col">
                         <img src="' . $url . '" alt="" srcset="" style="max-height: 150px;"/>
+                        <div class="wel_img_cont_title">'.$image.'
+                            <div class="wel_img_cont_artistname"> By '.$artistname.' </div>
+                            </div>
                         </div>
                         ';
                     if ($row1) {
                         echo '
                             <div class="wel_img_cont col">
                             <img src="' . $url1 . '" alt="" srcset="" style="max-height: 150px;"/>
+                            <div class="wel_img_cont_title">'.$image1.'
+                            <div class="wel_img_cont_artistname"> By '.$artistname1.' </div>
+                            </div>
                             </div>
                         ';
                     }
@@ -88,6 +101,9 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] !== true) {
                         echo '
                             <div class="wel_img_cont col">
                             <img src="' . $url2 . '" alt="" srcset="" style="max-height: 150px;"/>
+                            <div class="wel_img_cont_title">'.$image2.'
+                            <div class="wel_img_cont_artistname"> By '.$artistname2.' </div>
+                            </div>
                             </div>
                         ';
                     }
@@ -95,6 +111,9 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] !== true) {
                         echo '
                             <div class="wel_img_cont col">
                             <img src="' . $url3 . '" alt="" srcset="" style="max-height: 150px;"/>
+                            <div class="wel_img_cont_title">'.$image3.'
+                            <div class="wel_img_cont_artistname"> By '.$artistname3.' </div>
+                            </div>
                             </div>
                         ';
                     }

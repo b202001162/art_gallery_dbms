@@ -68,7 +68,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Artist Id</th>
+                        <th scope="col">Artist</th>
                         <th scope="col">Operations</th>
                     </tr>
                 </thead>
@@ -83,11 +83,11 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
                             $id = $row['id'];
                             $imgname = $row['imgname'];
                             $url = $row['url'];
-                            $artistID = $row['artistID'];
+                            $artistname = $row['artistname'];
                             echo '<tr>
                             <th scope="row">' . $id . "</th>
-                            <td>" . $imgname . "</td>
-                            <td>" . $artistID . '</td>
+                            <td>" . $imgname . '</td>
+                            <td>' . $artistname . '</td>
                             <td><a href="' . $url . '" target="_blank"><button class="btn bg-secondary text-light" id="" style="width: auto;">View</button></a>
                             
                                 <!-- Button trigger modal -->

@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $_SESSION['adminname'] = $row['username'];
 
                 $_SESSION['id'] = $row['id'];
-                $_SESSION["adm_loggedin"] = true;
+                $_SESSION["admin"] = true;
 
                 //Redirect user to welcome page
                 header("location: admin_welcome.php");
