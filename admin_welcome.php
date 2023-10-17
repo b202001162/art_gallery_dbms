@@ -2,7 +2,7 @@
 
 session_start();
 require_once "config.php";
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     header("location: admin.php");
 }
 

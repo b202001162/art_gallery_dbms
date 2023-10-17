@@ -17,14 +17,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (empty(trim($_POST['username'])) || empty(trim($_POST['password']))) {
         $err = "Please enter username + password";
     } else {
+        $choice = $_POST['radio'];
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
     }
 
 
     if (empty($err)) {
-
-        $sql = "SELECT * FROM user WHERE username='$username' AND password='$password'";
+        if($choice == "artist") {
+            $sql = "SELECT * FROM artist WHERE username='$username' AND password='$password'";
+        } else {
+            $sql = "SELECT * FROM user WHERE username='$username' AND password='$password'";
+        }
 
         $result = mysqli_query($conn, $sql);
 
@@ -33,11 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $row = mysqli_fetch_assoc($result);
 
             if ($row['username'] === $username && $row['password'] === $password) {
-
-                $_SESSION['username'] = $row['username'];
-
+                
                 $_SESSION['id'] = $row['id'];
-                $_SESSION["loggedin"] = true;
+                if($choice == "artist") {
+                    $_SESSION['artist'] = true;
+                    $_SESSION['artistname'] = $row['username'];
+                } else {
+                    $_SESSION['user'] = true;
+                    $_SESSION['username'] = $row['username'];
+                }
 
                 //Redirect user to welcome page
                 header("location: welcome.php");
@@ -125,6 +133,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <h4>User Login Here:</h4>
             <hr>
             <form action="" method="post">
+                <div class="form-group form-radio">
+                    <input type="radio" name="radio" class="form-radio-input" id="radio1" value="artist" required>
+                    <label class="form-radio-label" for="radio1" style="margin-right: 5px">Artist</label>
+                    <input type="radio" name="radio" class="form-radio-input" id="radio2" value="user" required>
+                    <label class="form-radio-label" for="radio2">User</label>
+                </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Username</label>
                     <input type="text" name="username" class="form-control" id="exampleInputEmail1"
@@ -134,10 +148,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1"
                         placeholder="Enter Password" style="background-color: #00000008;">
-                </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
                 <button id="submit-btn" class="btn btn-secondary" type="submit" class="wel_btn" style="">Submit</button>
             </form>

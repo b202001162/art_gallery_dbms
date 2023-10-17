@@ -3,7 +3,7 @@
 session_start();
 
 // check if the user is already logged in
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['user'])) {
     header("location: welcome.php");
     exit;
 }
@@ -34,10 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             if ($row['username'] === $username && $row['password'] === $password) {
 
-                $_SESSION['username'] = $row['username'];
+                $_SESSION['adminname'] = $row['username'];
 
                 $_SESSION['id'] = $row['id'];
-                $_SESSION["loggedin"] = true;
+                $_SESSION["adm_loggedin"] = true;
 
                 //Redirect user to welcome page
                 header("location: admin_welcome.php");

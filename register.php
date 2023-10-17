@@ -2,13 +2,13 @@
 require_once "config.php";
 
 $username = $password  = "";
-$username_err = $password_err = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // Check if username is empty
     if (empty(trim($_POST["username"]))) {
-        $username_err = "Username cannot be blank";
+        $_SESSION['username_err'] = "Username cannot be blank";
+        header("location: register.php");
     } else {
         $sql = "SELECT id FROM user WHERE username = ?";
         $stmt = mysqli_prepare($conn, $sql);
@@ -22,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) == 1) {
-                    $username_err = "This username is already taken";
+                    $_SESSION['username_err'] = "This username is already taken";
+                    header("location: register.php");
                 } else {
                     $username = trim($_POST['username']);
                 }
@@ -37,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // Check for password
     if (empty(trim($_POST['password']))) {
-        $password_err = "Password cannot be blank";
+        $_SESSION['password_err'] = "Password cannot be blank";
     } elseif (strlen(trim($_POST['password'])) < 5) {
-        $password_err = "Password cannot be less than 5 characters";
+        $_SESSION['password_err'] = "Password cannot be less than 5 characters";
     } else {
         $password = trim($_POST['password']);
     }
@@ -114,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <div class="form-group">
                     <label for="inputEmail4">Username</label>
                     <input type="text" class="form-control" name="username" id="inputEmail4" placeholder="Username">
+                    <span class="help-block"><?php if(isset($_SESSION['username_err'])) echo $_SESSION['username_err']; ?></span>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
