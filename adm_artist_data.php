@@ -59,7 +59,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
 
         <!-- Button trigger modal -->
         <a href="add_artist.php"><button type="button" class="btn btn-primary"
-                style="position: fixed; top: 85%; right: 1.5%;">
+                style="position: fixed; top: 85%; right: 1.5%; z-index: 5;">
                 <span class="material-symbols-outlined">
                     person_add
                 </span>
